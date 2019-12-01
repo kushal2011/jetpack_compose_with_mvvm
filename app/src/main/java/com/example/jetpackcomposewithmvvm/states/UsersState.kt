@@ -4,4 +4,4 @@ import androidx.compose.Model
 import com.example.jetpackcomposewithmvvm.models.UserModel
 
 @Model
-class UsersState(var users:ArrayList<UserModel> = ArrayList())
+data class UsersState(var users: ArrayList<UserModel> = ArrayList())

@@ -5,17 +5,14 @@ import androidx.ui.core.Text
 import androidx.ui.core.dp
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.FlexColumn
-import androidx.ui.layout.Row
-import androidx.ui.layout.WidthSpacer
+import androidx.ui.layout.*
 import androidx.ui.material.*
 import com.example.jetpackcomposewithmvvm.states.UsersState
 
 object UsersListUi {
 
     @Composable
-    fun addList(state: UsersState) {
+    fun addList(state: UsersState, onAddClick: () -> Unit, onRemoveClick: () -> Unit) {
         MaterialTheme {
             FlexColumn {
                 inflexible {
@@ -23,6 +20,23 @@ object UsersListUi {
                     TopAppBar( // App Bar with title
                         title = { Text("Users") }
                     )
+                    FlexRow() {
+                        expanded(flex = 1f) {
+                            Button(
+                                text = "add",
+                                onClick = { onAddClick.invoke() },
+                                style = OutlinedButtonStyle()
+                            )
+
+                        }
+                        expanded(flex = 1f) {
+                            Button(
+                                text = "sub",
+                                onClick = { onRemoveClick.invoke() },
+                                style = OutlinedButtonStyle()
+                            )
+                        }
+                    }
                     VerticalScroller {
                         Column {
                             state.users.forEach {
@@ -43,9 +57,8 @@ object UsersListUi {
                 }
 
             }
+
         }
-
     }
-
 
 }

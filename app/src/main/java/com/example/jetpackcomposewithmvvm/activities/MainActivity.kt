@@ -10,7 +10,7 @@ import com.example.jetpackcomposewithmvvm.viewModels.UsersListViewModel
 
 class MainActivity : AppCompatActivity() {
     private val usersState: UsersState = UsersState()
-    private val usersListViewModel:UsersListViewModel = UsersListViewModel()
+    private val usersListViewModel: UsersListViewModel = UsersListViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,10 @@ class MainActivity : AppCompatActivity() {
         })
         usersListViewModel.addUsers()
         setContent {
-            UsersListUi.addList(usersState)
+            UsersListUi.addList(
+                usersState,
+                onAddClick = { usersListViewModel.addNewUser() },
+                onRemoveClick = { usersListViewModel.removeFirstUser() })
         }
     }
 
